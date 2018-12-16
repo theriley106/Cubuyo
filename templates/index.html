@@ -1,0 +1,43 @@
+<html>
+<style>
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.top-screen {
+}
+</style>
+<script>
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function newScramble() {
+	scramble = httpGet("/genNew");
+	document.getElementById("scramble") = scramble;
+}
+
+
+</script>
+
+ <head>
+ </head>
+ <body>
+
+<div>
+	<center>
+		<h1 id="scramble">I'm on the top</h1>
+	</center>
+</div>
+ <div class="center-screen">
+<h1> I'm in the center </h1>
+ </div>
+ </body>
+ </html>
