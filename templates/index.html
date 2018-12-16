@@ -7,31 +7,27 @@
   align-items: center;
   text-align: center;
 
-  min-height: 75vh;
-}
-.top-screen {
-}
-h1 {
-   font-size: 500%; // makes font bigger on 50%
+  min-height: 50vh;
 }
 </style>
 
 
  <head>
  </head>
- <body>
+<body>
+	<div>
+		<center>
+			<h2 id="scramble">I'm on the top</h2>
+		</center>
+	</div>
 
-<div>
-	<center>
-		<h2 id="scramble">I'm on the top</h2>
-	</center>
-</div>
- <div class="center-screen">
- <center>
-<h1 id="result">I'm in the center </h1>
-</center>
- </div>
- </body>
+
+	<div class="center-screen">
+		<center>
+			<h1 style="font-size: 400%;" id="result">0</h1>
+		</center>
+	</div>
+</body>
 <script>
 function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
@@ -52,8 +48,9 @@ newScramble();
 window.timerStarted = false;
 window.startTime = 0;
 
-function startTime(){
-
+function setTime(timeVal){
+	var r = document.getElementById("result");
+    	r.innerHTML = '<h1 style="font-size: 400%;" id="result">' + timeVal + '</h1>';
 }
 
 document.body.onkeyup = function(e){
@@ -61,8 +58,8 @@ document.body.onkeyup = function(e){
     	if (window.timerStarted){
     		window.timerStarted = false;
     		var endTime = (performance.now() - window.startTime) / 1000;
-    		var r = document.getElementById("result");
-    		r.innerHTML = '<h1 id="result">' + endTime.toFixed(2) + '</h1>';
+    		setTime((endTime - 0.005).toFixed(2));
+    		newScramble();
     	} else {
     		console.log("Started timer");
     		window.timerStarted = true;
@@ -72,5 +69,20 @@ document.body.onkeyup = function(e){
     }
 }
 
+function loading(){
+	if (window.timerStarted){
+		var currentTime = (performance.now() - window.startTime) / 1000;
+    	var r = document.getElementById("result");
+    	var thisVal = (currentTime - .5).toFixed(0);
+    	if (thisVal < 1){
+    		setTime(0);
+    	} else{
+    		setTime(thisVal);
+    }
+	}
+}
+
+setTime("0.00");
+setInterval(function(){loading();}, 200);
 </script>
  </html>
