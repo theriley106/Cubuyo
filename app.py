@@ -7,7 +7,10 @@ app = Flask(__name__, static_url_path='/static')
 SCRAMBLES = []
 
 
-
+if (os.path.exists(DB_FILE) == False):
+	with open(DB_FILE,'a') as fd:
+		writer = csv.writer(fd)
+		writer.writerow(["Scramble", "Time"])
 
 @app.route('/', methods=['GET'])
 def index():
@@ -26,16 +29,10 @@ def submitTime(timeVal):
 		timeVal = float(timeVal.replace("E", "."))
 	except:
 		timeVal = 0.0
-	if (os.path.exists(DB_FILE) == False):
-		writeType = 'w'
-	else:
-		writeType = 'a'
-	with open(DB_FILE,writeType) as fd:
+	with open(DB_FILE,'a') as fd:
 		writer = csv.writer(fd)
 		writer.writerow([scrambleVal, timeVal])
 	return ""
 
 if __name__ == '__main__':
-	SCRAMBLES.append("Test")
-	submitTime("45E31423")
 	app.run(host='127.0.0.1', port=5000)
