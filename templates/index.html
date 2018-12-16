@@ -6,11 +6,31 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
+
+  min-height: 75vh;
 }
 .top-screen {
 }
+h1 {
+   font-size: 500%; // makes font bigger on 50%
+}
 </style>
+
+ <head>
+ </head>
+ <body>
+
+<div>
+	<center>
+		<h2 id="scramble">I'm on the top</h2>
+	</center>
+</div>
+ <div class="center-screen">
+ <center>
+<h1> I'm in the center </h1>
+</center>
+ </div>
+ </body>
 <script>
 function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
@@ -21,23 +41,13 @@ function httpGet(theUrl) {
 
 function newScramble() {
 	scramble = httpGet("/genNew");
-	document.getElementById("scramble") = scramble;
+	var s = document.getElementById("scramble");
+	s.innerHTML = "<h2 id='scramble'>" + scramble + "</h2>";
+	console.log(document.getElementById("scramble").value);
+	console.log(scramble);
 }
 
+newScramble();
 
 </script>
-
- <head>
- </head>
- <body>
-
-<div>
-	<center>
-		<h1 id="scramble">I'm on the top</h1>
-	</center>
-</div>
- <div class="center-screen">
-<h1> I'm in the center </h1>
- </div>
- </body>
  </html>
