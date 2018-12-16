@@ -10,24 +10,28 @@
   min-height: 50vh;
 }
 </style>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
 
-
- <head>
- </head>
 <body>
 	<div>
 		<center>
-			<h2 id="scramble">I'm on the top</h2>
+			<h2 id="scramble"></h2>
 		</center>
 	</div>
-
-
 	<div class="center-screen">
 		<center>
 			<h1 style="font-size: 400%;" id="result">0</h1>
 		</center>
 	</div>
+	<div >
+		<center>
+			<button>Success</button>
+		</center>
+	</div>
 </body>
+
 <script>
 function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
@@ -53,19 +57,26 @@ function setTime(timeVal){
     	r.innerHTML = '<h1 style="font-size: 400%;" id="result">' + timeVal + '</h1>';
 }
 
+function submitTime(timeVal){
+	var str = timeVal.toString();
+	var n = str.replace(".", "E");
+	console.log(n);
+	httpGet("/complete/" + n);
+}
+
 document.body.onkeyup = function(e){
     if(e.keyCode == 32){
     	if (window.timerStarted){
     		window.timerStarted = false;
     		var endTime = (performance.now() - window.startTime) / 1000;
     		setTime((endTime - 0.005).toFixed(2));
+    		submitTime(endTime.toFixed(5));
     		newScramble();
     	} else {
     		console.log("Started timer");
     		window.timerStarted = true;
     		window.startTime = performance.now();
     	}
-        //your code
     }
 }
 
