@@ -1,6 +1,5 @@
-# RubiksCubeTimer
-Rubik's cube Time Web App
-
+# Cubuyo
+Minimalistic Rubik's cube timer with CSV session summaries
 
 ## Web App
 
