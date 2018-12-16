@@ -27,7 +27,7 @@
 	</div>
 	<div >
 		<center>
-		<form method="get" action="static/database.csv">
+		<form id="downloadForm" method="get" action="../static/database.csv">
 			<button type="submit" class="btn btn-secondary btn-lg">Download CSV</button>
 			</form>
 		</center>
@@ -35,6 +35,10 @@
 </body>
 
 <script>
+var res = document.URL.split("session/");
+window.sessionID = res[res.length-1].split("/")[0];
+var g = document.getElementById("downloadForm");
+g.setAttribute("action", "../static/" + window.sessionID + ".csv");
 function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
@@ -43,7 +47,7 @@ function httpGet(theUrl) {
 }
 
 function newScramble() {
-	scramble = httpGet("/genNew");
+	scramble = httpGet("/genNew/" + window.sessionID);
 	var s = document.getElementById("scramble");
 	s.innerHTML = "<h2 id='scramble'>" + scramble + "</h2>";
 	console.log(document.getElementById("scramble").value);
@@ -63,7 +67,7 @@ function submitTime(timeVal){
 	var str = timeVal.toString();
 	var n = str.replace(".", "E");
 	console.log(n);
-	httpGet("/complete/" + n);
+	httpGet("/complete/" + window.sessionID + "/" + n);
 }
 
 document.body.onkeyup = function(e){
