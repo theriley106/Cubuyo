@@ -1,7 +1,4 @@
-# Cubuyo
-Minimalistic Rubik's cube timer with CSV session summaries
-
-<h1 align="center"><a href="https://cubuyo.herokuapp.com/">Link to the Web App</a></h1>
+<h1 align="center"><a href="https://cubuyo.herokuapp.com/">Link to the Cubuyo Web App</a></h1>
 
 ### Running Locally on Windows/Linux/OSX
 
