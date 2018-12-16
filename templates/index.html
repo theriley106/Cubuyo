@@ -16,6 +16,7 @@ h1 {
 }
 </style>
 
+
  <head>
  </head>
  <body>
@@ -27,7 +28,7 @@ h1 {
 </div>
  <div class="center-screen">
  <center>
-<h1> I'm in the center </h1>
+<h1 id="result">I'm in the center </h1>
 </center>
  </div>
  </body>
@@ -48,6 +49,28 @@ function newScramble() {
 }
 
 newScramble();
+window.timerStarted = false;
+window.startTime = 0;
+
+function startTime(){
+
+}
+
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){
+    	if (window.timerStarted){
+    		window.timerStarted = false;
+    		var endTime = (performance.now() - window.startTime) / 1000;
+    		var r = document.getElementById("result");
+    		r.innerHTML = '<h1 id="result">' + endTime.toFixed(2) + '</h1>';
+    	} else {
+    		console.log("Started timer");
+    		window.timerStarted = true;
+    		window.startTime = performance.now();
+    	}
+        //your code
+    }
+}
 
 </script>
  </html>
